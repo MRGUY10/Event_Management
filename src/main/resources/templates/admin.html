@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <script src="dashboard.js"></script>
+    <style>
+        /* CSS styles for the dashboard */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #333;
+            padding-top: 20px;
+        }
+
+        .sidebar h2 {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            padding: 10px;
+        }
+
+        .sidebar ul li a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #555;
+        }
+
+        /* Content Styles */
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        .widgets {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .widget {
+            flex: 1;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .widget h3 {
+            margin-top: 0;
+            font-size: 20px;
+        }
+
+        .activity-list {
+            padding-left: 20px;
+        }
+
+        .data-placeholder {
+            color: #888;
+            text-align: center;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+<div class="sidebar">
+    <h2>Event Management System</h2>
+    <ul>
+        <li><a href="#" onclick="showDashboard()">Dashboard</a></li>
+        <li><a href="/events/user">Events</a></li>
+        <li><a href="#">Venues</a></li>
+        <li><a href="/contacts">Contacts</a></li>
+        <li><a href="#">Notifications</a></li>
+        <li><a href="#">Budget</a></li>
+        <li><a href="#">Profile</a></li>
+        <li><a href="#">Settings</a></li>
+    </ul>
+</div>
+<div class="content" id="dashboardContent" style="display:none;">
+    <h2>Dashboard</h2>
+    <div class="widgets">
+        <div class="widget">
+            <h3>Recent Activity</h3>
+            <ul id="recentActivityList" class="activity-list">
+                <!-- Recent activity items will be populated here -->
+            </ul>
+        </div>
+        <div class="widget">
+            <h3>Budget Report</h3>
+            <canvas id="budgetChart" width="400" height="200"></canvas>
+        </div>
+        <div class="widget">
+            <h3>Attendance Statistics</h3>
+            <canvas id="attendanceChart" width="400" height="200"></canvas>
+        </div>
+        <div class="widget">
+            <h3>Venue Utilization</h3>
+            <div id="venueUtilization" class="data-placeholder">
+                <!-- Venue utilization data will be populated here -->
+            </div>
+        </div>
+        <div class="widget">
+            <h3>Notification Overview</h3>
+            <div id="notificationOverview" class="data-placeholder">
+                <!-- Notification overview data will be populated here -->
+            </div>
+        </div>
+        <div class="widget">
+            <h3>Profile Summary</h3>
+            <div id="profileSummary" class="data-placeholder">
+                <!-- Profile summary data will be populated here -->
+            </div>
+        </div>
+        <div class="widget">
+            <h3>Settings Overview</h3>
+            <div id="settingsOverview" class="data-placeholder">
+                <!-- Settings overview data will be populated here -->
+            </div>
+        </div>
+        <div class="widget">
+            <h3>Feedback and Surveys</h3>
+            <div id="feedbackSurveys" class="data-placeholder">
+                <!-- Feedback and surveys data will be populated here -->
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

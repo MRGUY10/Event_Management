@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delete Contact</title>
+</head>
+<body>
+<form action="/contacts/delete" method="post">
+  <input type="hidden" name="id" th:value="${e.id}">
+  <h2>Delete Contact</h2>
+  <p>Are you sure you want to delete the contact "<span th:text="${contact.name}"></span>"?</p>
+  <button type="submit">Delete Contact</button>
+</form>
+</body>
+</html>
