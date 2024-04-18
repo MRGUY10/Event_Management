@@ -42,11 +42,11 @@ public class ContactController {
         try {
             contactService.saveContact(contact);
             redirectAttributes.addFlashAttribute("message", "Contact created successfully!");
-            return "redirect:/contacts/create";
+            return "redirect:/contacts";
         } catch (Exception e) {
             // Handle error
             redirectAttributes.addFlashAttribute("error", "Failed to create contact: " + e.getMessage());
-            return "redirect:/contacts/create";
+            return "redirect:/contacts";
         }
     }
 

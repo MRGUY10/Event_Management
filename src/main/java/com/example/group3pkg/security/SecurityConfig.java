@@ -39,15 +39,18 @@ public class SecurityConfig {
 
         http.csrf(c -> c.disable())
 
-                .authorizeHttpRequests(request -> request.requestMatchers("/admin-page")
-                        .hasAuthority("ADMIN").requestMatchers("/user-page").hasAuthority("USER")
-                        .requestMatchers("/registration", "/css/**","/api/contacts","/api/events","/api/events/{id}","/api/venues","/api/venues/{id}").permitAll()
+                .authorizeHttpRequests(request -> request.requestMatchers("/admin-page","/css/**")
+                        .hasAuthority("ADMIN").requestMatchers("/user-page","/css/**").hasAuthority("USER")
+                        .requestMatchers("/registration", "/css/**","/api/contacts","/api/events","/api/events/{id}","/api/venues","/api/venues/{id}","/api/tasks","/api/login","/login","/css/**","/Contact").permitAll()
                         .requestMatchers("/events", "/css/**").permitAll()
                         .requestMatchers("/contacts/create", "/css/**").permitAll()
                         .requestMatchers("/events/create","/events/user","/events/delete","/events/edit","/events/update","/contacts/create" ,"/css/**").permitAll()
                         .requestMatchers("/contacts","/events/user","/contacts/delete","/contacts/edit","/contacts/update","/contacts/create" ,"/css/**").permitAll()
                         .requestMatchers("/venue","/venue/delete","/venue/edit","/venue/update","/venue/create" ,"/css/**").permitAll()
+                        .requestMatchers("/Task","/Tasks/delete","/tasks/edit","/tasks/update","/Tasks/create" ,"/css/**").permitAll()
+                        .requestMatchers( "/styles/**","/js/**","/Img_SVG/**","/fonts/**","/css/**","/assets/**","/forms/**").permitAll()
                         .anyRequest().authenticated())
+
 
                 .formLogin(form -> form.loginPage("/login").loginProcessingUrl("/login")
                         .successHandler(customSuccessHandler).permitAll())

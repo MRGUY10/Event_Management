@@ -24,20 +24,20 @@ public class EventController {
 	public String showAllEvents(Model model) {
 		List<Event> events = eventService.getAllEvent();
 		model.addAttribute("events", events);
-		return "user"; // Return the HTML template for displaying all events
+		return "Event"; // Return the HTML template for displaying all events
 	}
 
 
 	@GetMapping("/events/create")
 	public String showCreateForm(Model model) {
 		model.addAttribute("event", new Event());
-		return "create_event"; // Return the HTML template for creating an event
+		return "Event"; // Return the HTML template for creating an event
 	}
 
 	@PostMapping("/events/create")
 	public String createEvent(@ModelAttribute Event event) {
 		eventService.saveEvent(event);
-		return "redirect:/events/create?success"; // Redirect to the create event form with success message
+		return "Event"; // Redirect to the create event form with success message
 	}
 
 	@GetMapping("/events/edit/{id}")
