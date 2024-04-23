@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
+import com.example.group3pkg.models.EventType;
 
 import java.sql.Date;
 import java.sql.Time;
@@ -19,13 +20,13 @@ public class Event {
 
     private String eventName;
     private String venue;
-    private String eventType;
     private Date eventDate;
     private String startTime;
     private String EndTime;
-    private String Budget;
+    private int Budget;
     private String contact;
     private String Description;
+    private String eventType;
 
 
 }

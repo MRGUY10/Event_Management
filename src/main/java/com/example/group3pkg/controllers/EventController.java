@@ -1,7 +1,9 @@
 package com.example.group3pkg.controllers;
 
 import com.example.group3pkg.models.Event;
+import com.example.group3pkg.models.EventType;
 import com.example.group3pkg.services.EventService;
+import com.example.group3pkg.services.EventTypeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,17 +15,21 @@ import java.util.List;
 public class EventController {
 	
 	private EventService eventService;
+	private EventTypeService eventTypeService;
 
-	public EventController(EventService eventService) {
+	public EventController(EventService eventService,EventTypeService eventTypeService) {
 		super();
 		this.eventService = eventService;
+		this.eventTypeService = eventTypeService;
 	}
 	
 	// handler method to handle list students and return mode and view
 	@GetMapping("/events/user")
 	public String showAllEvents(Model model) {
 		List<Event> events = eventService.getAllEvent();
+		List<EventType> eventTypes = eventTypeService.getAllEventType();
 		model.addAttribute("events", events);
+		model.addAttribute("eventTypes", eventTypes);
 		return "Event"; // Return the HTML template for displaying all events
 	}
 
@@ -34,7 +40,7 @@ public class EventController {
 		return "Event"; // Return the HTML template for creating an event
 	}
 
-	@PostMapping("/events/create")
+	@PostMapping("/events/create" )
 	public String createEvent(@ModelAttribute Event event) {
 		eventService.saveEvent(event);
 		return "Event"; // Redirect to the create event form with success message
