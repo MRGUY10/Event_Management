@@ -20,7 +20,7 @@ public class VenueController {
     }
 
     // handler method to handle list students and return mode and view
-    @GetMapping("/venue")
+    @GetMapping("/Venue")
     public String showAllVenue(Model model) {
         List<Venue> venue = venueService.getAllVenue();
         model.addAttribute("venue", venue);
@@ -31,7 +31,7 @@ public class VenueController {
     @GetMapping("/venue/create")
     public String showCreateForm(Model model) {
         model.addAttribute("venue", new Venue());
-        return "create_venue";
+        return "/Venue";
     }
 
     @PostMapping("/venue/create")
@@ -39,11 +39,11 @@ public class VenueController {
         try {
             venueService.saveVenue(venue);
             redirectAttributes.addFlashAttribute("message", "Venue created successfully!");
-            return "redirect:/venue/create";
+            return "redirect:/Venue";
         } catch (Exception e) {
             // Handle error
             redirectAttributes.addFlashAttribute("error", "Failed to create venue: " + e.getMessage());
-            return "redirect:/venue/create";
+            return "redirect:/Venue";
         }
     }
 
@@ -57,7 +57,7 @@ public class VenueController {
     @PostMapping("/venue/update")
     public String updateVenue(@ModelAttribute Venue venue) {
         venueService.updateVenue(venue);
-        return "redirect:/venue"; // Redirect to the events page after updating the event
+        return "redirect:/Venue"; // Redirect to the events page after updating the event
     }
 
     @PostMapping("/venue/{id}")
@@ -76,7 +76,7 @@ public class VenueController {
 
         // save updated student object
         venueService.updateVenue(existingVenue);
-        return "redirect:/venue";
+        return "redirect:/Venue";
     }
 
     // handler method to handle delete student request
@@ -84,7 +84,7 @@ public class VenueController {
     @PostMapping("/venue/delete")
     public String deleteVenue(@RequestParam("id") Long eventId) {
         venueService.deleteVenueById(eventId);
-        return "redirect:/venue"; // Redirect to the events page after deletion
+        return "redirect:/Venue"; // Redirect to the events page after deletion
     }
 
 }

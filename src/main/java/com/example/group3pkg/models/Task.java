@@ -23,6 +23,7 @@ public class Task {
     private String assignee;
     private String status;
     private String collaborators;
+    private int budget;
 
 
 }
