@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete EventType</title>
+</head>
+<body>
+<form action="/EventType/delete" method="post">
+    <input type="hidden" name="id" th:value="${e.id}">
+    <h2>Delete EventType</h2>
+    <p>Are you sure you want to delete the event "<span th:text="${eventType.name}"></span>"?</p>
+    <button type="submit">Delete EventType</button>
+</form>
+</body>
+</html>

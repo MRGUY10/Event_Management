@@ -1,9 +1,13 @@
 package com.example.group3pkg.controllers;
 
+import com.example.group3pkg.models.Contact;
 import com.example.group3pkg.models.Event;
 import com.example.group3pkg.models.EventType;
+import com.example.group3pkg.models.Venue;
+import com.example.group3pkg.services.ContactService;
 import com.example.group3pkg.services.EventService;
 import com.example.group3pkg.services.EventTypeService;
+import com.example.group3pkg.services.VenueService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,11 +20,16 @@ public class EventController {
 	
 	private EventService eventService;
 	private EventTypeService eventTypeService;
+	private  VenueService venueService;
+	private ContactService contactService;
 
-	public EventController(EventService eventService,EventTypeService eventTypeService) {
+	public EventController(EventService eventService,EventTypeService eventTypeService,VenueService venueService,ContactService contactService) {
 		super();
 		this.eventService = eventService;
 		this.eventTypeService = eventTypeService;
+		this.venueService = venueService;
+		this.contactService = contactService;
+
 	}
 	
 	// handler method to handle list students and return mode and view
@@ -30,6 +39,10 @@ public class EventController {
 		List<EventType> eventTypes = eventTypeService.getAllEventType();
 		model.addAttribute("events", events);
 		model.addAttribute("eventTypes", eventTypes);
+		List<Venue> venue = venueService.getAllVenue();
+		model.addAttribute("venue", venue);
+		List<Contact> contacts = contactService.getAllContacts();
+		model.addAttribute("contacts", contacts);
 		return "Event"; // Return the HTML template for displaying all events
 	}
 
