@@ -1,15 +1,9 @@
 package com.example.group3pkg.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
-import com.example.group3pkg.models.EventType;
-
 import java.sql.Date;
-import java.sql.Time;
-import java.sql.Timestamp;
+
 
 @Entity
 @Data
@@ -18,9 +12,11 @@ public class Event {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     private String eventName;
     private String venue;
-    private Date eventDate;
+    private Date StartDate;
+    private Date EndDate;
     private String startTime;
     private String EndTime;
     private int Budget;

@@ -1,6 +1,12 @@
 package com.example.group3pkg.controllers;
 
+import com.example.group3pkg.models.Contact;
+import com.example.group3pkg.models.Event;
+import com.example.group3pkg.models.EventType;
 import com.example.group3pkg.models.Task;
+import com.example.group3pkg.services.ContactService;
+import com.example.group3pkg.services.EventService;
+import com.example.group3pkg.services.EventTypeService;
 import com.example.group3pkg.services.TaskService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,10 +19,14 @@ import java.util.List;
 public class TaskController  {
 
     private TaskService taskService;
+    private ContactService contactService;
+    private EventService eventService;
 
-    public TaskController(TaskService taskService) {
+    public TaskController(TaskService taskService, ContactService contactService, EventService eventService) {
         super();
         this.taskService = taskService;
+        this.contactService = contactService;
+        this.eventService = eventService;
     }
 
     // handler method to handle list students and return mode and view
@@ -24,6 +34,10 @@ public class TaskController  {
     public String showAllTask(Model model) {
         List<Task> tasks = taskService.getAllTask();
         model.addAttribute("Task", tasks);
+        List<Contact> contacts = contactService.getAllContacts();
+        model.addAttribute("contacts", contacts);
+        List<Event> events = eventService.getAllEvent();
+        model.addAttribute("events", events);
         return "Task"; // Return the HTML template for displaying all events
     }
 
@@ -72,7 +86,6 @@ public class TaskController  {
         existingTask.setDescription(task.getDescription());
         existingTask.setDeadline(task.getDeadline());
         existingTask.setPriority(task.getPriority());
-        existingTask.setAssignee(task.getAssignee());
         existingTask.setStatus(task.getStatus());
         existingTask.setCollaborators(task.getCollaborators());
 

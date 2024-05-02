@@ -52,7 +52,8 @@
         </div>
         <div class="form-group">
             <label for="phone">Phone:</label>
-            <input type="text" id="phone" name="phone" class="form-control" required>
+            <input type="tel" id="phone" name="phone" class="form-control" pattern="[0-9]{9}" title="Please enter a 9-digit number" required>
+            <small class="form-text text-muted">Please enter a 9-digit number.</small>
         </div>
         <div class="form-group">
             <label for="email">Mail:</label>

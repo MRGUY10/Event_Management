@@ -46,8 +46,9 @@ public class SecurityConfig {
                         .requestMatchers("/contacts/create", "/css/**").permitAll()
                         .requestMatchers("/events/create","/events/user","/events/delete","/events/edit","/events/update","/contacts/create" ,"/css/**").permitAll()
                         .requestMatchers("/contacts","/events/user","/contacts/delete","/contacts/edit","/contacts/update","/contacts/create" ,"/css/**").permitAll()
-                        .requestMatchers("/venue","/venue/delete","/venue/edit","/venue/update","/venue/create" ,"/css/**").permitAll()
+                        .requestMatchers("/Venue","/venue/delete","/venue/edit","/venue/update","/venue/create" ,"/css/**").permitAll()
                         .requestMatchers("/Task","/Tasks/delete","/tasks/edit","/tasks/update","/Tasks/create" ,"/css/**").permitAll()
+                        .requestMatchers("/EventType","/EventType/delete","/EventType/edit","/EventType/update","/EventType/create","/EventType/user" ,"/css/**").permitAll()
                         .requestMatchers( "/styles/**","/js/**","/Img_SVG/**","/fonts/**","/css/**","/assets/**","/forms/**").permitAll()
                         .anyRequest().authenticated())
 
