@@ -1,39 +1,104 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Form</title>
+    <title>User Registration</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+        }
+        .form-group {
+            margin-bottom: 30px;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
-    <div class="message" th:if="${message != null}">
-        [[${message}]]
-    </div>
-    <h2>Registration Form</h2>
-    <form
-            th:action="@{/registration}"
-            method="post"
-            role="form"
-            th:object="${user}"
-    >
+    <h2 class="text-center mb-4">User Registration</h2>
+    <!-- Registration Form - Step 1 -->
+    <form id="registrationFormStep1" th:action="@{/registration}" method="post" role="form" th:object="${user}">
+        <!-- Username and Email Input -->
         <div class="form-group">
-            <label for="fullname">Fullname:</label>
-            <input th:field="*{fullname}" type="text" id="fullname" name="fullname" placeholder="Enter your fullname" required>
+            <input th:field="*{username}" type="text" class="form-control" name="username" placeholder="Username" required>
         </div>
-
         <div class="form-group">
-            <label for="email">Email:</label>
-            <input th:field="*{email}" type="email" id="email" name="email" placeholder="Enter your email" required>
+            <input th:field="*{email}" type="email" class="form-control" name="email" placeholder="Email" required>
         </div>
-
         <div class="form-group">
-            <label for="password">Password:</label>
-            <input th:field="*{password}" type="password" id="password" name="password" placeholder="Enter your password" required>
+            <input th:field="*{role}" type="text" class="form-control" name="role" placeholder="Role" required>
         </div>
-        <input type="submit" value="Register">
+        <!-- Next Button -->
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Next</button>
+        </div>
     </form>
 
+    <!-- Registration Form - Step 2 -->
+    <form id="registrationFormStep2" th:action="@{/user-verify}" style="display: none;">
+        <!-- Verification Code Input -->
+        <div class="form-group">
+            <input type="text" class="form-control" name="email" placeholder="Email" required>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="otp" placeholder="Verification Code" required>
+        </div>
+        <!-- Next Button -->
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Next</button>
+        </div>
+    </form>
+
+    <!-- Registration Form - Step 3 -->
+    <form id="registrationFormStep3"   style="display: none;">
+        <!-- Password Setup -->
+        <div class="form-group">
+            <input type="text" class="form-control"  placeholder="Email" required>
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" name="password" placeholder="Password" required>
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" name="confirmPassword" placeholder="Confirm Password" required>
+        </div>
+        <!-- Register Button -->
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Register</button>
+        </div>
+    </form>
 </div>
+
+<!-- Bootstrap JS (Optional) -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- jQuery (Optional, required for Bootstrap) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Custom JavaScript -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Custom JavaScript -->
+<script>
+    $(document).ready(function(){
+        // Show Step 2 form when Step 1 form is submitted
+        $("#registrationFormStep1").submit(function(e){
+            $("#registrationFormStep1").hide();
+            $("#registrationFormStep2").show();
+            // You might want to return false to prevent the default form submission
+            // This ensures that the form doesn't submit in case there are issues with the JavaScript
+            // return false;
+        });
+
+        // Show Step 3 form when Step 2 form is submitted
+        $("#registrationFormStep2").submit(function(e){
+            $("#registrationFormStep2").hide();
+            $("#registrationFormStep3").show();
+            // return false;
+        });
+    });
+</script>
 </body>
 </html>

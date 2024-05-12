@@ -1,0 +1,62 @@
+.side_bar .menu ul li:nth-child(5),.min_side .menu ul li:nth-child(5){
+  background-color: #e2e8f2;
+  color: #83b3ee;
+}
+.side_bar .menu ul li:nth-child(5) a{
+  border: 0;
+  border-left: 2px white solid;
+  padding-left: 1em;
+}
+.details_block{
+  /* background-color: red; */
+  height: 85.5vh;
+  box-sizing: border-box;
+  padding-top: 1em;
+  .dets,.dets_text{
+    width: fit-content;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 1em;
+  }
+  .dets h3{
+    font-size: 1em;
+  }
+  .dets p{
+    margin-left: 1em;
+  }
+  .dets:last-child{
+    width: 100%;
+    margin-bottom: 0;
+    /* justify-content: space-between; */
+    /* background-color: bisque; */
+  }
+  .clicables{
+    /* width: 50%; */
+    /* background-color: #03720B; */
+    display: flex;
+    .btn{
+      width: 10em;
+      justify-content: space-around;
+      border-radius: 2px;
+      padding-top: 0.4em ;
+      padding-bottom: 0.4em ;
+      align-self: flex-end;
+    }
+    img{
+      width: 1.5em;
+      background-color: red;
+      padding: 0.3em;
+      border-radius: 50%;
+      margin-left: 1em;
+    }
+  }
+}
+.map{
+  height: 57.8vh;
+  /* background-color: palegoldenrod; */
+  img{
+    width: 100%;
+    height: inherit;
+  }
+}

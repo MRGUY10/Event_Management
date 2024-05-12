@@ -1,0 +1,64 @@
+#squeeze{
+  width: 2em;
+  aspect-ratio: 1/1;
+  background-color: pink;
+  position: absolute;
+  right: -1.5em;
+  top: 48%
+  /* display: none; */
+}
+.min_side{
+  background-color: #03720B;
+  width: 4.2em;
+  height: 66vh;
+  position: absolute;
+  /* align-self: center; */
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  bottom: 12vh;
+  transition: 0.5s ease-in;
+}
+.min_side h1,.min_side h3,.min_side .logout{
+  display: none
+}
+.min_side ul{
+  margin-top: 2.9em;
+}
+.min_side ul li{
+  /* background-color: antiquewhite; */
+  width: 82%;
+  margin: 0.7em 0;
+  margin-left: 0.5em;
+  padding: 10px 0;
+  padding-left: 5px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+.min_side ul li:hover{
+  background-color: white;
+}
+.min_side ul li:hover > a{
+  background-color: #03720B;
+  border-radius: 10px;
+}
+.min_side ul li a:nth-child(1){
+  display: none;
+}
+.min_side ul li a:nth-child(2){
+  width: fit-content;
+}
+.min_side ul li a:nth-child(2) img{
+  width: 2.3em;
+}
+.min_side + div {
+  width: 100%;
+  /* background-color: antiquewhite; */
+}
+.min_side + div header{
+  width: 97.9%;
+}
+.min_side + div main{
+  margin-left: 3.5em;
+  width: 91.6%;
+  /* background-color: aquamarine; */
+}

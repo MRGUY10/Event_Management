@@ -1,0 +1,45 @@
+body{
+    height: fit-content;
+}
+.del_container{
+    width: 25%;
+    height: 23vh;
+    border: 0.5em;
+    background-color:whitesmoke;
+    margin: auto;
+    border-radius: 10px;
+    position: absolute;
+    left: 35%;
+    top: 25%;
+}
+p{
+    text-align: center;
+margin-top: 2em;
+margin-top: 30px;
+}
+
+.buts{
+    color: aliceblue;
+    border-radius: 5px;
+    text-align: center;
+    border: 0;
+    cursor: pointer;
+    width: 25%; 
+}
+.y_n{
+    display: flex;
+    width:60%;
+   margin: auto;
+   margin-top: 2em;
+    justify-content: space-between;
+}
+#yes{
+background-color: #0047D5;
+
+}
+#no{
+background-color: #83b3ee;;
+}
+
+   
+

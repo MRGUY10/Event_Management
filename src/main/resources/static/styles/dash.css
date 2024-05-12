@@ -1,0 +1,10 @@
+.side_bar .menu ul li:nth-child(1),.min_side .menu ul li:nth-child(1){
+  background-color: #e2e8f2;
+  color: #83b3ee;
+}
+.box{
+  height: fit-content;
+  width: fit-content;
+  background-color: #03720B;
+  padding: 40px 20px 10px 15px ;
+}

@@ -1,42 +1,24 @@
 package com.example.group3pkg.models;
 
 
-
 import jakarta.persistence.*;
 import lombok.Data;
 
-@Entity
 @Data
-@Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+@Entity
+@Table(name = "users")
 public class User {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    @Column(unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long user_id;
+    private String username;
     private String email;
-    @Column (unique = true)
+    @Enumerated(EnumType.STRING)
+    private Role role;
     private String password;
-    @Column (unique = true)
-    private String role;
-    @Column (unique = true)
-    private String fullname;
-
-    public User() {
-        super();
-    }
-
-    public User(String email, String password, String role, String fullname) {
-
-        this.email = email;
-        this.password = password;
-        this.role = role;
-        this.fullname = fullname;
-    }
+    private String otp;
+    private boolean verified;
 }
-
-
-
 
 
 

@@ -1,6 +1,8 @@
 package com.example.group3pkg.services;
 
 
+
+
 import java.io.IOException;
 
 import org.springframework.security.core.Authentication;
@@ -35,5 +37,8 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
     }
 
 }
+
+
+
 
 

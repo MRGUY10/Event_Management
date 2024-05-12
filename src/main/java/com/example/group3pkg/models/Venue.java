@@ -16,12 +16,11 @@ public class Venue {
     private String name;
     @Column (unique = true)
     private String address;
-    @Column (unique = true)
     private int capacity;
-    @Column (unique = true)
     private String location;
-    @Column (unique = true)
-    private String amenities;
+    private int Latitudes;
+    private int Longitudes;
+
 
 
 }

@@ -50,48 +50,51 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="eventName">Event Name:</label>
-                    <input type="text" id="eventName" name="eventName" class="form-control" th:value="${event.eventName}" required>
+                    <label for="eventName"></label>
+                    <input type="text" id="eventName" name="text" class="form-control" th:value="${event.text}" required>
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="form-group">
-                    <label for="venue">Venue:</label>
-                    <input type="text" id="venue" name="venue" class="form-control" th:value="${event.venue}" required>
-                </div>
+                <select class="form-control" id="venue" name="venue"  >
+                    <option th:value="${event.venue}"></option>
+                    <!-- Assuming ${venues} is an array of venues -->
+                    <option th:each="venues : ${venue}"  th:value="${venues.name}" th:text="${venues.name}"></option>
+                </select>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6">
-                <div class="form-group">
-                    <label for="eventType">Start Type:</label>
-                    <input type="text" id="eventType" name="eventType" th:value="${event.eventType}" class="form-control" required>
-                </div>
+                <select class="form-control" id="eventType1" name="eventType" >
+                    <option th:value="${event.eventType}" ></option>
+                    <!-- Assuming ${eventTypes} is an array of event types -->
+                    <option th:each="type : ${eventTypes}" th:value="${type.name}" th:text="${type.name}"></option>
+                </select>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="eventDate">End Date:</label>
-                    <input type="date" id="eventDate" name="eventDate" class="form-control" th:value="${event.StartDate}" required>
+                    <input type="date" id="eventDate" name="start" class="form-control" th:value="${event.start}" required>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="eventDate">Event Date:</label>
-                    <input type="date" id="eventDat5e" name="eventDate" class="form-control" th:value="${event.EndDate}" required>
+                    <input type="date" id="eventDat5e" name="end" class="form-control" th:value="${event.end}" required>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6">
-                <div class="form-group">
-                    <label for="contact">Contact:</label>
-                    <input type="text" id="contact" name="contact" class="form-control" th:value="${event.contact}" required>
-                </div>
+                <select class="form-control" id="taskName" name="contact" th:value="${event.contact}" >
+                    <option  th:value="${event.contact}" ></option>
+                    <!-- Assuming ${contacts} is an array of contacts -->
+                    <option th:each="contacts: ${contact}" th:value="${contacts.name}" th:text="${contacts.name}"></option>
+                </select>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="Description">Description:</label>
-                    <input type="text" id="Description" name="Description" class="form-control" th:value="${event.Description}" required>
+                    <input type="text" id="Description" name="Description" class="form-control" th:value="${event.description}" required>
                 </div>
             </div>
         </div>
@@ -99,13 +102,13 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="startTime">Start Time:</label>
-                    <input type="time" id="startTime" name="startTime" class="form-control" th:value="${event.StartTime}" required>
+                    <input type="time" id="startTime" name="startTime" class="form-control" th:value="${event.startTime}" required>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="EndTime">End Time:</label>
-                    <input type="time" id="EndTime" name="EndTime" class="form-control" th:value="${event.EndTime}" required>
+                    <input type="time" id="EndTime" name="EndTime" class="form-control" th:value="${event.endTime}" required>
                 </div>
             </div>
         </div>
@@ -113,7 +116,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="Budget">Budget:</label>
-                    <input type="text" id="Budget" name="Budget" class="form-control" th:value="${event.Budget}" required>
+                    <input type="text" id="Budget" name="Budget" class="form-control" th:value="${event.budget}" required>
                 </div>
             </div>
         </div>

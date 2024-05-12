@@ -60,6 +60,7 @@ public class VenueController {
         return "redirect:/Venue"; // Redirect to the events page after updating the event
     }
 
+
     @PostMapping("/venue/{id}")
     public String updateVenue(@PathVariable Long id,
                                 @ModelAttribute("venue") Venue venue,
@@ -72,7 +73,8 @@ public class VenueController {
         existingVenue.setAddress(venue.getAddress());
         existingVenue.setCapacity(venue.getCapacity());
         existingVenue.setLocation(venue.getLocation());
-        existingVenue.setAmenities(venue.getAmenities());
+        existingVenue.setLatitudes(venue.getLatitudes());
+        existingVenue.setLongitudes(venue.getLongitudes());
 
         // save updated student object
         venueService.updateVenue(existingVenue);

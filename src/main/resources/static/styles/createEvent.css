@@ -1,0 +1,122 @@
+/* *{
+  box-sizing: border-box;
+} */
+.container{
+/* padding: 90px; */
+width: 60%;
+height: fit-content;
+border: 0.5em;
+background-color: white;
+margin: auto;
+border-radius: 15px;
+position: absolute;
+left: 20%;
+top: 5%;
+z-index: 6;
+display: none;
+padding-inline: 20px;
+padding-block: 0 20px;
+}
+h1{
+text-align: center;
+font-size: 1.3em;
+font-weight: 500;
+margin-block: .4em;
+}
+.create{
+display: flex;
+background-color: whitesmoke;
+justify-content: space-between;
+margin-block: 0 20px;
+
+}
+.name{
+    background-color: whitesmoke;
+    width: 48%;
+    /* height: 30vh; */
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+}
+.ans{
+background-color: whitesmoke;
+display: flex;
+flex-direction: column;
+width: 100%;
+margin-bottom: 0.5em;
+
+/* height:80px; */
+}
+.ans input,.ans select{
+border: 0.5px solid black;
+border-radius: px;
+    margin-top: 0.5em;
+    padding: 0.3em 1em;
+    /* border: 0; */
+    border-radius: 5px;
+
+}
+
+.even{
+display: flex;
+flex-direction: column;
+width: 48%;
+background-color: whitesmoke;
+height: 30vh;
+justify-content: space-between;
+}
+.from{
+width: 100%;
+background-color: whitesmoke;
+display: flex;
+justify-content: space-between;
+/* .ans{
+        background-color: plum;
+        width: 48%;
+    } */
+}
+/* .To{
+    display: flex;
+    .ans{
+        width: 48%;
+    }
+} */
+.Descript{
+display: flex;
+}
+.DES{
+flex-direction: column;
+border: 0px;
+
+}
+textarea{
+    border-radius: 15px;
+}
+.Canc{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+.image{
+flex-direction: column;
+margin-top: 20px;
+padding: 10px;
+}
+.buts{
+    padding-block: .3em;
+    padding-inline: .3em;
+    color: aliceblue;
+    border-radius: 5px;
+    text-align: center;
+    border: 0;
+    cursor: pointer;
+}
+.Canc{
+    margin-block: .5em 0;
+}
+#Cancel{
+background-color: red;
+}
+#Create{
+background-color:green;
+}

@@ -2,12 +2,20 @@ package com.example.group3pkg.services;
 
 
 
+
+
+
+
 import java.util.Collection;
 import java.util.List;
 
-import com.example.group3pkg.models.User;
+
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.example.group3pkg.models.User;
 
 
 public class CustomUserDetail implements UserDetails {
@@ -20,12 +28,15 @@ public class CustomUserDetail implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // TODO Auto-generated method stub
-        return List.of(() -> user.getRole());
+        // Convert Role enum to GrantedAuthority
+        GrantedAuthority authority = new SimpleGrantedAuthority(user.getRole().toString());
+
+        // Return a list containing the authority
+        return List.of(authority);
     }
 
-    public String getFullname() {
-        return user.getFullname();
+    public String getEmail() {
+        return user.getEmail();
     }
 
     @Override

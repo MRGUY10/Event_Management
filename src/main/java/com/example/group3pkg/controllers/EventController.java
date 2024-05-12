@@ -50,23 +50,36 @@ public class EventController {
 	@GetMapping("/events/create")
 	public String showCreateForm(Model model) {
 		model.addAttribute("event", new Event());
-		return "Event"; // Return the HTML template for creating an event
+		return "redirect:/events/user"; // Return the HTML template for creating an event
 	}
+	@GetMapping("/calendar")
+	public String Calendar() {
+
+		return "index"; // Return the HTML template for creating an event
+	}
+
 
 	@PostMapping("/events/create" )
 	public String createEvent(@ModelAttribute Event event) {
 		eventService.saveEvent(event);
-		return "Event"; // Redirect to the create event form with success message
+		return "redirect:/events/user"; // Redirect to the create event form with success message
 	}
 
 	@GetMapping("/events/edit/{id}")
 	public String showEditForm(@PathVariable Long id, Model model) {
 		Event event = eventService.getEventById(id);
+		List<EventType> eventTypes = eventTypeService.getAllEventType();
+		List<Venue> venue = venueService.getAllVenue();
+		List<Contact> contacts = contactService.getAllContacts();
 		model.addAttribute("event", event);
+		model.addAttribute("contact", contacts);
+		model.addAttribute("venue", venue);
+		model.addAttribute("eventTypes", eventTypes);
 		return "edit_Event"; // Return the HTML template for editing an event
 	}
 	@PostMapping("/events/update")
 	public String updateEvent(@ModelAttribute Event event) {
+
 		eventService.updateEvent(event);
 		return "redirect:/events/user"; // Redirect to the events page after updating the event
 	}

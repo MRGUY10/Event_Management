@@ -7,7 +7,9 @@ import com.example.group3pkg.services.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -41,14 +43,7 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests(request -> request.requestMatchers("/admin-page","/css/**")
                         .hasAuthority("ADMIN").requestMatchers("/user-page","/css/**").hasAuthority("USER")
-                        .requestMatchers("/registration", "/css/**","/api/contacts","/api/events","/api/events/{id}","/api/venues","/api/venues/{id}","/api/tasks","/api/login","/login","/css/**","/Contact").permitAll()
-                        .requestMatchers("/events", "/css/**").permitAll()
-                        .requestMatchers("/contacts/create", "/css/**").permitAll()
-                        .requestMatchers("/events/create","/events/user","/events/delete","/events/edit","/events/update","/contacts/create" ,"/css/**").permitAll()
-                        .requestMatchers("/contacts","/events/user","/contacts/delete","/contacts/edit","/contacts/update","/contacts/create" ,"/css/**").permitAll()
-                        .requestMatchers("/Venue","/venue/delete","/venue/edit","/venue/update","/venue/create" ,"/css/**").permitAll()
-                        .requestMatchers("/Task","/Tasks/delete","/tasks/edit","/tasks/update","/Tasks/create" ,"/css/**").permitAll()
-                        .requestMatchers("/EventType","/EventType/delete","/EventType/edit","/EventType/update","/EventType/create","/EventType/user" ,"/css/**").permitAll()
+                        .requestMatchers("/registration","(/api/contacts/list)","(/api/contacts/create)","(/api/contacts/list)","/api/events","/user-verify","/set-password", "/css/**","/api/contacts","/api/tasks/create","/api/tasks/list","/api/auth/user-verify","/api/auth/set-password","/api/events","/api/events/{id}","/api/venues","/api/venues/{id}","/api/auth/user-register","/login","/css/**").permitAll()
                         .requestMatchers( "/styles/**","/js/**","/Img_SVG/**","/fonts/**","/css/**","/assets/**","/forms/**").permitAll()
                         .anyRequest().authenticated())
 
@@ -67,6 +62,10 @@ public class SecurityConfig {
     @Autowired
     public void configure (AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder());
+    }
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
     }
 
 }

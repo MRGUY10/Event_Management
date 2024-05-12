@@ -65,14 +65,24 @@ public class TaskController  {
     @GetMapping("/tasks/edit/{id}")
     public String showEditForm(@PathVariable Long id, Model model) {
             Task task = taskService.getTaskById(id);
+            List<Contact> contacts = contactService.getAllContacts();
         model.addAttribute("tasks", task);
+        model.addAttribute("contacts", contacts);
         return "edit_Task"; // Return the HTML template for editing an event
     }
+    @GetMapping("/tasks/view/{id}")
+    public String showViewForm(@PathVariable Long id, Model model) {
+        Task task = taskService.getTaskById(id);
+        model.addAttribute("task", task);
+        return "View_task"; // Return the HTML template for viewing a task
+    }
+
     @PostMapping("/tasks/update")
     public String updateTask(@ModelAttribute Task task) {
         taskService.updateTask(task);
         return "redirect:/Task"; // Redirect to the events page after updating the event
     }
+
 
     @PostMapping("/tasks/{id}")
     public String updateTask(@PathVariable Long id,

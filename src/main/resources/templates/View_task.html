@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Task</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 800px;
+            margin-top: 50px;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .btn {
+            width: 100%;
+            padding: 0.75rem;
+            font-size: 1rem;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+        .btn-secondary:hover {
+            background-color: #545b62;
+            border-color: #545b62;
+        }
+        /* Enlarge the description box */
+        #description {
+            height: 120px; /* Adjust the height as needed */
+        }
+    </style>
+</head>
+<body>
+
+<div  class="container">
+    <h2 class="text-center mb-4">View Task</h2>
+    <input type="hidden" name="id" th:value="${task.id}">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="taskName">Task Name</label>
+                <input type="text" class="form-control" id="taskName" th:value="${task.title}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="deadline">Deadline</label>
+                <input type="text" class="form-control" id="deadline" th:value="${task.deadline}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="priority">Priority</label>
+                <input type="text" class="form-control" id="priority" th:value="${task.priority}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="status">Status</label>
+                <input type="text" class="form-control" id="status" th:value="${task.status}" readonly>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input class="form-control" id="description" th:value="${task.description}" readonly>
+                <div class="form-group">
+                    <label for="collaborators">Collaborators</label>
+                    <input type="text" class="form-control" id="collaborators" th:value="${task.collaborators}" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="budget">Budget</label>
+                    <input type="text" class="form-control" id="budget" th:value="${task.budget}" readonly>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <a th:href="@{'/tasks/edit/' + ${task.id}}" class="btn btn-primary"><i class="fas fa-edit"></i> Edit Task</a>
+            </div>
+            <div class="col-md-6">
+                <a th:href="@{/Task}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back</a>
+            </div>
+        </div>
+
+    </div>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+    // JavaScript code here
+</script>
+
+</body>
+</html>

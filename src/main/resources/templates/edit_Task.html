@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Contact</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 500px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 class="text-center mb-4">Edit Contact</h2>
+    <form id="editTaskForm" action="/tasks/update" method="post">
+        <input type="hidden" name="id" th:value="${tasks.id}">
+        <div class="form-group">
+            <label for="editTaskName">Task Name</label>
+            <input type="text" class="form-control" id="editTaskName" name="title" th:value="${tasks.title}" required>
+        </div>
+        <div class="form-group">
+            <label for="editDeadline">Deadline</label>
+            <input type="date" class="form-control" id="editDeadline" name="deadline" th:value="${tasks.deadline}" required>
+        </div>
+        <div class="form-group">
+            <label for="editPriority">Priority</label>
+            <select class="form-control" id="editPriority" th:value="${tasks.priority}" name="priority" required>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="editDescription">Description</label>
+            <input type="text" class="form-control" id="editDescription" th:value="${tasks.description}" name="description" required>
+        </div>
+        <select class="form-control" id="taskName" name="collaborators" required>
+            <option  th:value="${tasks.collaborators}" value="">Select a collaborators</option>
+            <!-- Assuming ${contacts} is an array of contacts -->
+            <option th:each="contact: ${contacts}" th:value="${contact.name}" th:text="${contact.name}"></option>
+        </select>
+        <div class="form-group">
+            <label for="editStatus">Status</label>
+            <select class="form-control" id="editStatus" name="status" th:value="${tasks.status}" required>
+                <option value="Open">Open</option>
+                <option value="In_Progress">In Progress</option>
+                <option value="Completed">Completed</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="editBudget">Budget</label>
+            <input type="number" class="form-control" id="editBudget" th:value="${tasks.budget}" name="budget" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <button id="cancelBtn" type="button" class="btn btn-secondary">Cancel</button>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+    $(document).ready(function() {
+        // Function to handle form submission via AJAX
+        $('#editTaskForm').submit(function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            var formData = $(this).serialize(); // Serialize the form data
+
+            // AJAX call to submit the form data
+            $.ajax({
+                url: '/tasks/update',
+                method: 'POST',
+                data: formData,
+                success: function(response) {
+                    // Handle success response
+                    // Display success message
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Task Updated',
+                        text: 'The Task has been updated successfully.',
+                        showConfirmButton: false,
+                        timer: 1500,
+                        // Redirect to /Task after displaying the message
+                        timerProgressBar: true,
+                        willClose: () => {
+                            window.location.href = '/Task';
+                        }
+                    });
+                },
+                error: function(xhr, status, error) {
+                    // Handle error
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+
+        // Function to handle cancel button click
+        $('#cancelBtn').click(function() {
+            // Redirect to previous page or perform any other action
+            window.history.back();
+        });
+    });
+</script>
+
+
+</body>
+</html>
