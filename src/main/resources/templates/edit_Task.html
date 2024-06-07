@@ -25,6 +25,13 @@
             <label for="editTaskName">Task Name</label>
             <input type="text" class="form-control" id="editTaskName" name="title" th:value="${tasks.title}" required>
         </div>
+        <div class="mb-3">
+            <label for="event" class="form-label">Event</label>
+            <select class="form-control" id="event" name="event.id" required onchange="updateEventBudget()">
+                <option value="">Select an event</option>
+                <option th:each="event : ${events}" th:value="${event.id}" th:text="${event.text}" th:data-budget="${event.budget}"></option>
+            </select>
+        </div>
         <div class="form-group">
             <label for="editDeadline">Deadline</label>
             <input type="date" class="form-control" id="editDeadline" name="deadline" th:value="${tasks.deadline}" required>
@@ -41,11 +48,13 @@
             <label for="editDescription">Description</label>
             <input type="text" class="form-control" id="editDescription" th:value="${tasks.description}" name="description" required>
         </div>
-        <select class="form-control" id="taskName" name="collaborators" required>
-            <option  th:value="${tasks.collaborators}" value="">Select a collaborators</option>
-            <!-- Assuming ${contacts} is an array of contacts -->
-            <option th:each="contact: ${contacts}" th:value="${contact.name}" th:text="${contact.name}"></option>
-        </select>
+        <div class="mb-3">
+            <label for="collaborators" class="form-label">Collaborators</label>
+            <select class="form-control" id="collaborators" name="contact.id" required>
+                <option value="">Select a collaborator</option>
+                <option th:each="contact : ${contacts}" th:value="${contact.id}" th:text="${contact.name}"></option>
+            </select>
+        </div>
         <div class="form-group">
             <label for="editStatus">Status</label>
             <select class="form-control" id="editStatus" name="status" th:value="${tasks.status}" required>

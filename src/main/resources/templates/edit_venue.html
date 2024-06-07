@@ -42,11 +42,11 @@
 
         <div class="form-group">
             <label for="editBudget">Latitudes</label>
-            <input type="number" class="form-control" id="editBudget" th:value="${venue.latitudes}" name="latitudes" required>
+            <input type="number" class="form-control" id="editBudget" th:value="${venue.latitude}" name="latitude" required>
         </div>
         <div class="form-group">
             <label for="editBudget">Longitudes</label>
-            <input type="number" class="form-control" id="editBudget1" th:value="${venue.longitudes}" name="longitudes" required>
+            <input type="number" class="form-control" id="editBudget1" th:value="${venue.longitude}" name="longitude" required>
         </div>
         <button type="submit" class="btn btn-primary">Save Changes</button>
         <button id="cancelBtn" type="button" class="btn btn-secondary">Cancel</button>

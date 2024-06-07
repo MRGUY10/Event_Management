@@ -47,11 +47,6 @@ public class EventController {
 	}
 
 
-	@GetMapping("/events/create")
-	public String showCreateForm(Model model) {
-		model.addAttribute("event", new Event());
-		return "redirect:/events/user"; // Return the HTML template for creating an event
-	}
 	@GetMapping("/calendar")
 	public String Calendar() {
 
@@ -88,20 +83,18 @@ public class EventController {
 	public String updateEvent(@PathVariable Long id,
 			@ModelAttribute("event") Event event,
 			Model model) {
-		
-		// get student from database by id
+
 		Event existingEvent = eventService.getEventById(id);
 		existingEvent.setId(id);
-		existingEvent.setEventName(event.getEventName());
+		existingEvent.setText(event.getText());
 		existingEvent.setVenue(event.getVenue());
 		existingEvent.setEventType(event.getEventType());
 		
-		// save updated student object
+
 		eventService.updateEvent(existingEvent);
 		return "redirect:/admin";
 	}
-	
-	// handler method to handle delete student request
+
 
 	@PostMapping("/events/delete")
 	public String deleteEvent(@RequestParam ("id") Long eventId) {

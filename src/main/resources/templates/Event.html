@@ -566,7 +566,7 @@
                                     <select class="form-control" id="eventType1" name="eventType" required>
                                         <option value="">Select an Event Type</option>
                                         <!-- Assuming ${eventTypes} is an array of event types -->
-                                        <option th:each="type : ${eventTypes}" th:value="${type.name}" th:text="${type.name}"></option>
+                                        <option th:each="type : ${eventTypes}" th:value="${type.id}" th:text="${type.name}"></option>
                                     </select>
                                 </div>
                                 <div class="mb-3">
@@ -574,7 +574,7 @@
                                     <select class="form-control" id="venue" name="venue" required>
                                         <option value="">Select a Venue</option>
                                         <!-- Assuming ${venues} is an array of venues -->
-                                        <option th:each="venues : ${venue}" th:value="${venues.name}" th:text="${venues.name}"></option>
+                                        <option th:each="venu : ${venue}" th:value="${venu.id}" th:text="${venu.name}"></option>
                                     </select>
                                 </div>
                                 <div class="mb-3">
@@ -591,7 +591,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="endTime" class="form-label">End Time</label>
-                                    <input type="time" class="form-control" id="endTime" name="EndTime" oninput="validateTime()" required>
+                                    <input type="time" class="form-control" id="endTime" name="endTime" oninput="validateTime()" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="budget" class="form-label">Budget</label>
@@ -602,7 +602,7 @@
                                     <select class="form-control" id="contact" name="contact" required>
                                         <option value="">Select a Contact</option>
                                         <!-- Assuming ${contacts} is an array of contacts -->
-                                        <option th:each="contact : ${contacts}" th:value="${contact.name}" th:text="${contact.name}"></option>
+                                        <option th:each="contact : ${contacts}" th:value="${contact.id}" th:text="${contact.name}"></option>
                                     </select>
                                 </div>
                                 <div class="mb-3">
@@ -626,14 +626,14 @@
                             <h5 th:text="${event.text}"></h5>
                         </div>
                         <div class="card-body">
-                            <p><i class="bi bi-geo-alt-fill" style="color: #2e8b57;"></i><span class="icon-text" th:text="${event.venue}"></span></p>
-                            <p><i class="bi bi-person-fill"></i><span class="icon-text" th:text="${event.eventType}"></span></p>
+                            <p><i class="bi bi-geo-alt-fill" style="color: #2e8b57;"></i><span class="icon-text" th:text="${event.venue.name}"></span></p>
+                            <p><i class="bi bi-person-fill"></i><span class="icon-text" th:text="${event.eventType.name}"></span></p>
                             <p><i class="bi bi-person-fill"></i>StartDate: <span class="icon-text" th:text="${event.start}"></span></p>
                             <p><i class="bi bi-person-fill"></i>EndDate: <span class="icon-text" th:text="${event.end}"></span></p>
                             <p><i class="bi bi-clock-fill"></i>StartTime: <span class="icon-text" th:text="${event.startTime}"></span></p>
                             <p><i class="bi bi-clock-fill"></i>EndTime: <span class="icon-text" th:text="${event.endTime}"></span></p>
                             <p>cfa: <span class="icon-text" th:text="${event.budget}"></span></p>
-                            <p><i class="bi bi-person-fill"></i><span class="icon-text" th:text="${event.contact}"></span></p>
+                            <p><i class="bi bi-person-fill"></i><span class="icon-text" th:text="${event.contact.name}"></span></p>
                             <p><i class="bi bi-chat-right-text-fill"></i><span class="icon-text" th:text="${event.description}"></span></p>
                             <div class="d-flex justify-content-between">
                                 <a th:href="@{'/events/edit/' + ${event.id}}" class="btn btn-outline-primary"><i class="bi bi-pencil-square"></i>Edit</a>

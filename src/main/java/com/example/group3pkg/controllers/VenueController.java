@@ -72,9 +72,8 @@ public class VenueController {
         existingVenue.setName(venue.getName());
         existingVenue.setAddress(venue.getAddress());
         existingVenue.setCapacity(venue.getCapacity());
-        existingVenue.setLocation(venue.getLocation());
-        existingVenue.setLatitudes(venue.getLatitudes());
-        existingVenue.setLongitudes(venue.getLongitudes());
+        existingVenue.setLatitude(venue.getLatitude());
+        existingVenue.setLongitude(venue.getLongitude());
 
         // save updated student object
         venueService.updateVenue(existingVenue);

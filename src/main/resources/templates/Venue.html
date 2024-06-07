@@ -123,6 +123,50 @@
             height: 110%; /* Set the height of the card */
         }
 
+        h1 {
+            color: #333;
+        }
+
+        #searchInput {
+            width: 300px;
+            padding: 10px;
+            margin: 20px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        #map {
+            width: 80%;
+            height: 400px;
+            margin: 20px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .geo-data {
+            list-style: none;
+            padding: 0;
+            width: 80%;
+            max-width: 600px;
+            background: #f9f9f9;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .geo-data li {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .geo-data span {
+            font-weight: bold;
+        }
+        #map {
+            height: 400px;
+        }
+
     </style>
 </head>
 
@@ -441,9 +485,8 @@
                                     <th scope="col">Name</th>
                                     <th scope="col"> Address</th>
                                     <th scope="col">Capacity</th>
-                                    <th scope="col">Location</th>
-                                    <th scope="col">Latitudes</th>
-                                    <th scope="col">Longitudes</th>
+                                    <th scope="col">Latitude</th>
+                                    <th scope="col">Longitude</th>
                                     <th scope="col">Actions</th>
                                 </tr>
                                 </thead>
@@ -460,11 +503,8 @@
                                             <span class="status-text" th:text="${venue.capacity}"></span>
                                         </div>
                                     </td>
-                                    <th>
-                                        <span class="ms-2" th:text="${venue.location}"></span>
-                                    </th>
-                                    <td class="align-middle" th:text="${venue.latitudes}"></td>
-                                    <td class="align-middle" th:text="${venue.longitudes}"></td>
+                                    <td class="align-middle" th:text="${venue.latitude}"></td>
+                                    <td class="align-middle" th:text="${venue.longitude}"></td>
 
                                     <td class="align-middle">
                                         <a th:href="@{'/venue/edit/' + ${venue.id}}" class="edit-task" title="Edit"><i class="fas fa-edit text-primary me-3"></i></a>
@@ -494,34 +534,40 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
+
                         <!-- Task Form -->
                         <form id="taskForm" action="/venue/create" method="post">
+                            <!-- Search input -->
+                            <input id="searchInput" class="controls" type="text" placeholder="Enter a location">
+
+                            <!-- Google map -->
+                            <div id="map" style="height: 400px;"></div>
+
+                            <!-- Display geolocation data -->
+
                             <div class="mb-3">
                                 <label for="taskName" class="form-label">Name</label>
                                 <input type="text" name="name" class="form-control" id="taskName" required>
                             </div>
-                            <div class="form-group">
-                                <label for="editDeadline">Address</label>
-                                <input type="text" class="form-control" id="editDeadline" name="address" required>
+                            <div class="mb-3">
+                                <label for="location" class="form-label">Address</label>
+                                <input type="text" class="form-control" id="location" name="address" required readonly>
                             </div>
                             <div class="mb-3">
                                 <label for="description" class="form-label">Capacity</label>
                                 <input type="number" name="capacity" class="form-control" id="description" required>
                             </div>
-
                             <div class="mb-3">
-                                <label for="budget" class="form-label">loction</label>
-                                <input type="text" name="location" class="form-control" id="budget" required>
+                                <label for="lat" class="form-label">Latitude</label>
+                                <input type="text" name="Latitude" class="form-control" id="lat" required readonly>
                             </div>
                             <div class="mb-3">
-                                <label for="budget" class="form-label">Latitute</label>
-                                <input type="number" name="Latitudes" class="form-control" id="budget" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="budget" class="form-label">Longitude</label>
-                                <input type="number" name="Longitudes" class="form-control" id="budget" required>
+                                <label for="lon" class="form-label">Longitude</label>
+                                <input type="text" name="Longitude" class="form-control" id="lon" required readonly>
                             </div>
                         </form>
+
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -537,6 +583,80 @@
 </main><!-- End #main -->
 <!-- Bootstrap JS -->
 
+<script>
+    function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: -33.8688, lng: 151.2195},
+            zoom: 13
+        });
+        var input = document.getElementById('searchInput');
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        autocomplete.bindTo('bounds', map);
+
+
+        var infowindow = new google.maps.InfoWindow();
+        var marker = new google.maps.Marker({
+            map: map,
+            anchorPoint: new google.maps.Point(0, -29)
+        });
+
+        // Event listener for autocomplete selection
+        autocomplete.addListener('place_changed', function() {
+            infowindow.close();
+            marker.setVisible(false);
+            var place = autocomplete.getPlace();
+            if (!place.geometry) {
+                window.alert("Autocomplete's returned place contains no geometry");
+                return;
+            }
+
+            // If the place has a geometry, present it on the map.
+            if (place.geometry.viewport) {
+                map.fitBounds(place.geometry.viewport);
+            } else {
+                map.setCenter(place.geometry.location);
+                map.setZoom(17);
+            }
+            marker.setPosition(place.geometry.location);
+            marker.setVisible(true);
+
+            // Setting the form fields
+            document.getElementById('location').value = place.formatted_address;
+            document.getElementById('lat').value = place.geometry.location.lat().toFixed(6); // 6 decimal places
+            document.getElementById('lon').value = place.geometry.location.lng().toFixed(6);
+        });
+
+        // Event listener for map clicks
+        map.addListener('click', function(e) {
+            var latLng = e.latLng;
+            marker.setPosition(latLng);
+            marker.setVisible(true);
+            map.panTo(latLng);
+
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({'location': latLng}, function(results, status) {
+                if (status === google.maps.GeocoderStatus.OK && results[0]) {
+                    infowindow.setContent(results[0].formatted_address);
+                    infowindow.open(map, marker);
+
+                    // Update the form fields
+                    document.getElementById('location').value = results[0].formatted_address;
+                    document.getElementById('lat').value = latLng.lat().toFixed(6);
+                    document.getElementById('lon').value = latLng.lng().toFixed(6);
+                } else {
+                    window.alert('Geocoder failed due to: ' + status);
+                }
+            });
+        });
+    }
+
+    // Add this line if you are using the Google Maps API script tag
+    // google.maps.event.addDomListener(window, 'load', initMap);
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKBOEOJ79eyU4iNQhhAAwQZJCWcCOfPbE&libraries=places&callback=initMap" async defer></script>
 
 <script>
     // Function to validate the start date against the current date

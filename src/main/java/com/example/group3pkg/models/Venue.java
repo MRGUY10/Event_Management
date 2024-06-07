@@ -12,15 +12,22 @@ public class Venue {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String name;
-    @Column (unique = true)
+
+    @Column(unique = true, nullable = false)
     private String address;
+
+    @Column(nullable = false)
     private int capacity;
-    private String location;
-    private int Latitudes;
-    private int Longitudes;
 
 
+    @Column(nullable = false)
+    private double latitude;
 
+    @Column(nullable = false)
+    private double longitude;
+
+    @OneToMany(mappedBy = "venue")
+    private List<Event> events;
 }

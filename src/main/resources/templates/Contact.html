@@ -442,6 +442,17 @@
             <h4 class="card-title" th:text="${contact.name}"></h4>
             <p th:text="${contact.email}"></p>
             <p th:text="${contact.phone}"></p>
+            <!-- Task List for each contact -->
+            <div class="task-list">
+                <h5>Tasks:</h5>
+                <ul>
+                    <li th:each="task : ${contact.tasks}">
+                        <span th:text="${task.title}"></span>
+                        <span th:text="${task.description}"></span>
+                        <span th:text="${task.deadline}"></span>
+                    </li>
+                </ul>
+            </div>
             <div class="contact-card-buttons">
                 <a th:href="@{'/contacts/edit/' + ${contact.id}}" class="btn btn-primary"><i class="fas fa-edit"></i> Update</a>
                 <form action="/contacts/delete" method="post">
@@ -453,6 +464,7 @@
         <!-- Add more contact cards as needed -->
     </div>
 </div>
+
 
 <!-- Optional: Bootstrap JavaScript -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

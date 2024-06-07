@@ -51,7 +51,7 @@ public class TaskRAPIController {
             existingTask.setDeadline(taskDetails.getDeadline());
             existingTask.setPriority(taskDetails.getPriority());
             existingTask.setStatus(taskDetails.getStatus());
-            existingTask.setCollaborators(taskDetails.getCollaborators());
+            existingTask.setContact(taskDetails.getContact());
             taskService.updateTask(existingTask);
             return ResponseEntity.ok().body(existingTask);
         } else {

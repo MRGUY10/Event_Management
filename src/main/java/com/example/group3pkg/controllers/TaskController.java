@@ -37,6 +37,7 @@ public class TaskController  {
         List<Contact> contacts = contactService.getAllContacts();
         model.addAttribute("contacts", contacts);
         List<Event> events = eventService.getAllEvent();
+        model.addAttribute("events", eventService.getAllEvent());
         model.addAttribute("events", events);
         return "Task"; // Return the HTML template for displaying all events
     }
@@ -47,27 +48,33 @@ public class TaskController  {
         model.addAttribute("task", new Task());
         return "/Task";
     }
-
     @PostMapping("/Tasks/create")
-    public String createTask(@ModelAttribute Task task, RedirectAttributes redirectAttributes) {
-        try {
-            taskService.saveTask(task);
-            redirectAttributes.addFlashAttribute("message", "Task created successfully!");
-            return "redirect:/Task";
-        } catch (Exception e) {
-            // Handle error
-            redirectAttributes.addFlashAttribute("error", "Failed to create Task: " + e.getMessage());
-            return "redirect:/Task";
+    public String createTask(@ModelAttribute Task task, Model model) {
+        Event event = eventService.getEventById(task.getEvent().getId());
+        int currentTotalBudget = taskService.getTotalBudgetByEvent(event);
+
+        if (currentTotalBudget + task.getBudget() > event.getBudget()) {
+            model.addAttribute("error", "Total task budget cannot be greater than event budget.");
+            model.addAttribute("contacts", contactService.getAllContacts());
+            model.addAttribute("events", eventService.getAllEvent());
+            return "/Task"; // Return to the form with an error message
         }
+
+        taskService.saveTask(task);
+        return "redirect:/Task"; // Redirect to a relevant page after saving
     }
+
+
 
 
     @GetMapping("/tasks/edit/{id}")
     public String showEditForm(@PathVariable Long id, Model model) {
             Task task = taskService.getTaskById(id);
             List<Contact> contacts = contactService.getAllContacts();
+        List<Event> events = eventService.getAllEvent();
         model.addAttribute("tasks", task);
         model.addAttribute("contacts", contacts);
+        model.addAttribute("events", events);
         return "edit_Task"; // Return the HTML template for editing an event
     }
     @GetMapping("/tasks/view/{id}")
@@ -80,7 +87,7 @@ public class TaskController  {
     @PostMapping("/tasks/update")
     public String updateTask(@ModelAttribute Task task) {
         taskService.updateTask(task);
-        return "redirect:/Task"; // Redirect to the events page after updating the event
+        return "redirect:/Task";
     }
 
 
@@ -97,7 +104,7 @@ public class TaskController  {
         existingTask.setDeadline(task.getDeadline());
         existingTask.setPriority(task.getPriority());
         existingTask.setStatus(task.getStatus());
-        existingTask.setCollaborators(task.getCollaborators());
+        existingTask.setContact(task.getContact());
 
         // save updated student object
         taskService.updateTask(existingTask);

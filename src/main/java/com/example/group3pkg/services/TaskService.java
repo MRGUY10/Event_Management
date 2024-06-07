@@ -13,7 +13,9 @@ public interface TaskService {
     Task getTaskById(Long id);
 
     Task updateTask(Task task);
+    int getTotalBudgetByEvent(Event event);
 
     void deleteTaskById(Long id);
+
 }
 

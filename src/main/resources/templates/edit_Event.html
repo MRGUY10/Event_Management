@@ -56,19 +56,22 @@
             </div>
             <div class="col-md-6">
                 <select class="form-control" id="venue" name="venue"  >
-                    <option th:value="${event.venue}"></option>
+                    <option th:value="${event.venue.name}"></option>
                     <!-- Assuming ${venues} is an array of venues -->
-                    <option th:each="venues : ${venue}"  th:value="${venues.name}" th:text="${venues.name}"></option>
+                    <option th:each="venues : ${venue}"  th:value="${venues.id}" th:text="${venues.name}" th:selected="${venues.id} == ${event.venue.id}"></option>
                 </select>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6">
-                <select class="form-control" id="eventType1" name="eventType" >
-                    <option th:value="${event.eventType}" ></option>
+                <select class="form-control" id="eventType1" name="eventType.id" required>
                     <!-- Assuming ${eventTypes} is an array of event types -->
-                    <option th:each="type : ${eventTypes}" th:value="${type.name}" th:text="${type.name}"></option>
+                    <option th:each="type : ${eventTypes}"
+                            th:value="${type.id}"
+                            th:text="${type.name}"
+                            th:selected="${type.id} == ${event.eventType.id}"></option>
                 </select>
+
             </div>
             <div class="col-md-6">
                 <div class="form-group">
@@ -85,10 +88,10 @@
         </div>
         <div class="row">
             <div class="col-md-6">
-                <select class="form-control" id="taskName" name="contact" th:value="${event.contact}" >
-                    <option  th:value="${event.contact}" ></option>
+                <select class="form-control" id="taskName" name="contact" th:value="${event.contact.name}" >
+                    <option  th:value="${event.contact.name}" ></option>
                     <!-- Assuming ${contacts} is an array of contacts -->
-                    <option th:each="contacts: ${contact}" th:value="${contacts.name}" th:text="${contacts.name}"></option>
+                    <option th:each="contacts: ${contact}" th:value="${contacts.id}" th:text="${contacts.name}" th:selected="${contacts.id} == ${event.contact.id}"></option>
                 </select>
             </div>
             <div class="col-md-6">

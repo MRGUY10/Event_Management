@@ -47,9 +47,7 @@ public class VenueRAPIController {
         Venue existingVenue = venueService.getVenueById(id);
         if (existingVenue != null) {
             existingVenue.setName(venueDetails.getName());
-            existingVenue.setAddress(venueDetails.getAddress());
             existingVenue.setCapacity(venueDetails.getCapacity());
-            existingVenue.setLocation(venueDetails.getLocation());
             venueService.updateVenue(existingVenue);
             return ResponseEntity.ok().body(existingVenue);
         } else {

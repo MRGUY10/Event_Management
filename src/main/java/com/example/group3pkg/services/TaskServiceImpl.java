@@ -1,5 +1,6 @@
 package com.example.group3pkg.services;
 
+import com.example.group3pkg.models.Event;
 import com.example.group3pkg.models.Task;
 import com.example.group3pkg.repositories.TaskRepository;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,12 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public void deleteTaskById(Long id) {
         taskRepository.deleteById(id);
+    }
+
+    @Override
+    public int getTotalBudgetByEvent(Event event) {
+        Integer totalBudget = taskRepository.sumBudgetByEvent(event);
+        return totalBudget != null ? totalBudget : 0;
     }
 
 }
