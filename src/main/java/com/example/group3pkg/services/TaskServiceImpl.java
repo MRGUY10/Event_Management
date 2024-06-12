@@ -45,5 +45,15 @@ public class TaskServiceImpl implements TaskService {
         Integer totalBudget = taskRepository.sumBudgetByEvent(event);
         return totalBudget != null ? totalBudget : 0;
     }
+    public double calculateCompletedTasksPercentageForEvent(Long eventId) {
+        int totalTasksForEvent = taskRepository.countByEventId(eventId);
+        int completedTasksForEvent = taskRepository.countCompletedTasksForEvent(eventId);
+
+        if (totalTasksForEvent == 0) {
+            return 0.0; // Avoid division by zero
+        }
+
+        return ((double) completedTasksForEvent / totalTasksForEvent) * 100;
+    }
 
 }

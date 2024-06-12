@@ -48,5 +48,33 @@ public class Event {
 
     @OneToMany(mappedBy = "event", cascade = CascadeType.REMOVE)
     private List<Task> tasks;
+    public int getProgressPercentage() {
+        if (tasks == null || tasks.isEmpty()) {
+            return 0;
+        }
+        long completedTasks = tasks.stream()
+                .filter(task -> task.getStatus() == TaskStatus.Completed)
+                .count();
+        return (int) ((completedTasks * 100) / tasks.size());
+    }
+//    public void setBudget(int budget) {
+//        if (budget > getTotalBudgetUsed()) {
+//            throw new IllegalArgumentException("Event's budget cannot be less than the total budget used by tasks.");
+//        }
+//        this.budget = budget;
+//    }
+
+
+    public int getTotalBudgetUsed() {
+        if (tasks == null || tasks.isEmpty()) {
+            return 0;
+        }
+        return tasks.stream()
+                .mapToInt(Task::getBudget)
+                .sum();
+    }
+
 
 }
+
+

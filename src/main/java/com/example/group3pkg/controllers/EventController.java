@@ -48,8 +48,7 @@ public class EventController {
 
 
 	@GetMapping("/calendar")
-	public String Calendar() {
-
+	public String displayCalendar() {
 		return "index"; // Return the HTML template for creating an event
 	}
 

@@ -9,4 +9,10 @@ import org.springframework.data.repository.query.Param;
 public interface TaskRepository extends JpaRepository<Task, Long> {
     @Query ("SELECT SUM(t.budget) FROM Task t WHERE t.event = :event")
     Integer sumBudgetByEvent(@Param("event") Event event);
+    @Query("SELECT COUNT(t) FROM Task t WHERE t.event.id = :eventId")
+    int countByEventId(Long eventId);
+
+    @Query("SELECT COUNT(t) FROM Task t WHERE t.event.id = :eventId AND t.status = 'Completed'")
+    int countCompletedTasksForEvent(Long eventId);
+
 }
